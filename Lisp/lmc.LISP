@@ -1,6 +1,3 @@
-;;;; Sofia Amarù 829495
-;;;; Jacopo De Angelis 769468
-
 ;;;; -*- Mode: Lisp -*-
 ;;;; lmc.lisp --
 
