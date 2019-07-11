@@ -1,6 +1,3 @@
-%%%% Amarù Sofia 829495
-%%%% De Angelis Jacopo 769468
-
 %%%% -*- Mode: Prolog -*-
 
 
@@ -73,7 +70,7 @@ rimuovi_commento([X], [Head]) :- % una sola riga con commento
       split_string(X, "/", "/", [Head | _]),
       !.
 
-rimuovi_commento([X | T], [X | T2]) :- % più righe, nessun commento
+rimuovi_commento([X | T], [X | T2]) :- % piÃ¹ righe, nessun commento
       string_chars(X, L),
       length(L, Lung),
       commento_al_num(L, N),
@@ -82,7 +79,7 @@ rimuovi_commento([X | T], [X | T2]) :- % più righe, nessun commento
       rimuovi_commento(T, T2),
       !.
 
-rimuovi_commento([X | T], [Head | T2]) :- % più righe, con commento
+rimuovi_commento([X | T], [Head | T2]) :- % piÃ¹ righe, con commento
       string_chars(X, L),
       commento_al_num(L, N),
       N > 0,
@@ -90,14 +87,14 @@ rimuovi_commento([X | T], [Head | T2]) :- % più righe, con commento
       rimuovi_commento(T, T2),
       !.
 
-rimuovi_commento([X | T], T2) :- % più righe, commento ad inizio riga
+rimuovi_commento([X | T], T2) :- % piÃ¹ righe, commento ad inizio riga
       string_chars(X, L),
       commento_al_num(L, N),
       N == 0,
       rimuovi_commento(T, T2),
       !.
 
-rimuovi_commento([X | T], T2) :- % più righe, X è una stringa vuota
+rimuovi_commento([X | T], T2) :- % piÃ¹ righe, X Ã¨ una stringa vuota
       string_chars(X, L),
       commento_al_num(L, N),
       N == -2,
@@ -180,7 +177,7 @@ slash_presente([X | T], Boolean) :-
 
 ricerca_etichette([X | T], N1) :- % input: lista di stringhe da codice
       split_string(X, " ", " ", ElencoParole),
-      ricerca_pattern(ElencoParole, N1), % N1 è l'indirizzo dell'etichetta
+      ricerca_pattern(ElencoParole, N1), % N1 Ã¨ l'indirizzo dell'etichetta
       N2 is N1 + 1,
       ricerca_etichette(T, N2),
       !.
@@ -190,7 +187,7 @@ ricerca_etichette([], _).
 
 %%% ricerca_pattern/2
 
-ricerca_pattern([X | _], N) :- % se non è carattere riservato crea l'etichetta
+ricerca_pattern([X | _], N) :- % se non Ã¨ carattere riservato crea l'etichetta
     X \= "add",
     X \= "sub",
     X \= "sta",
