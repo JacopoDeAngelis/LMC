@@ -1,23 +1,16 @@
-LP_E1P_2018_LMC: Little Man Computer
-
-Componenti del gruppo:
-829495 Amarù Sofia
-769468 De Angelis Jacopo
-
-
 lmc.pl implementa:
 - Un simulatore del LMC che dato il contenuto iniziale delle memoria (una lista di 100 numeri)
 e una sequenza di valori di input simuli il comportamento del LMC e produca il contenuto
-della coda di output dopo l’arresto del LMC;
-- Un assembler che, dato un file scritto nell’assembly semplificato del LMC produca il
+della coda di output dopo lâ€™arresto del LMC;
+- Un assembler che, dato un file scritto nellâ€™assembly semplificato del LMC produca il
 contenuto iniziale della memoria.
 
 
 Come utilizzare lmc.pl:
 Inserire nel prompt di SWI-Prolog "lmc_run(Filename, Inp, Out).", dove:
-Filename è l'indirizzo del file assembly che verrà elaborato;
-Inp è una lista di interi;
-Out è un simbolo a cui verrà associato l'output del programma.
+Filename Ã¨ l'indirizzo del file assembly che verrÃ  elaborato;
+Inp Ã¨ una lista di interi;
+Out Ã¨ un simbolo a cui verrÃ  associato l'output del programma.
 
 Esempio: ?- lmc_run("C:\\Users\\User\\Desktop\\factorial.lmc", [5], Out).
          Out = [120].
@@ -33,28 +26,28 @@ lmc_load(+Filename, -Mem)	apre Filename, lo analizza tramite i predicati errore_
 
 lmc_run(+Filename, +In, -Out)	richiama lmc_load/2 e execution_loop/2.
 
-slash_presente(+ListaDiCaratteri, -Boolean)	restituisce true se in ListaDiCaratteri è presente
+slash_presente(+ListaDiCaratteri, -Boolean)	restituisce true se in ListaDiCaratteri Ã¨ presente
 						almeno un carattere '/', altrimenti restituisce false. 
 
 commento_al_num(+Stringa, -N)	converte Stringa in una lista di caratteri che passa al predicato
 				slash_presente/2. 
 				Se slash_presente/2 restituisce false, allora nella stringa
-				non vi è nè un errore di sintassi nè un commento, e commento_al_num/2
+				non vi Ã¨ nÃ¨ un errore di sintassi nÃ¨ un commento, e commento_al_num/2
 				restituisce -2.
 				Se slash_presente/2 restituisce true, commento_al_num/2 controlla se vi 
-				sono due '/' consecutivi: se sì, il predicato restituisce un numero >=0
+				sono due '/' consecutivi: se sÃ¬, il predicato restituisce un numero >=0
 				che corrisponde all'inizio del commento, altrimenti restituisce -1 ad
 				indicare la presenza nel file di testo di un errore di sintassi. 
 
-rimuovi_commento(+Lista1, -Lista2)	Lista1 è una lista di stringhe (le righe del file assembly).
-					Lista2 è la lista di righe private dell'eventuale commento.
+rimuovi_commento(+Lista1, -Lista2)	Lista1 Ã¨ una lista di stringhe (le righe del file assembly).
+					Lista2 Ã¨ la lista di righe private dell'eventuale commento.
 					Richiama il predicato commento_al_num/2.
 
 errore_stringa(+Stringa, -Boolean) 	Esplicita la presenza di un errore di sintassi rilevato dal
 					predicato commento_al_num/2. 
 
-errore_file(+ListaDiStringhe, -Boolean)		ListaDiStringhe è la lista delle righe (l'intero file assembly). Il predicato
-						restituisce true se nel file è presente almeno un errore di sintassi,
+errore_file(+ListaDiStringhe, -Boolean)		ListaDiStringhe Ã¨ la lista delle righe (l'intero file assembly). Il predicato
+						restituisce true se nel file Ã¨ presente almeno un errore di sintassi,
 						altrimenti restituisce false. Usa errore_stringa/2.
 
 creazione_etichetta(+NomeEtichetta, +Num)	amplia la base delle conoscenze, inserendo il fatto
@@ -63,10 +56,10 @@ creazione_etichetta(+NomeEtichetta, +Num)	amplia la base delle conoscenze, inser
 creazione_istruzioni(ListaDiStringhe, Val)	ListaDiStringhe contiene le singole parole che compongono una riga di istruzione.
 						Converte il codice assembly in codice macchina.
 
-riempimento_memoria(+N, -Lista)		N è la lunghezza della memoria generata.
+riempimento_memoria(+N, -Lista)		N Ã¨ la lunghezza della memoria generata.
 					Restituisce una lista di lunghezza 100 - N contenente soli 0.
 
-cambio_valori(+Lista1, -Lista2)		fino a quando Lista1 è piena, riempie di 0 Lista2.
+cambio_valori(+Lista1, -Lista2)		fino a quando Lista1 Ã¨ piena, riempie di 0 Lista2.
 
 
 popola_memoria(+ElencoIstruzioni, -Mem)		chiama popola_memoria_istruzioni/2 ed esegue il padding della memoria.
@@ -74,19 +67,19 @@ popola_memoria(+ElencoIstruzioni, -Mem)		chiama popola_memoria_istruzioni/2 ed e
 popola_memoria_istruzioni(+ElencoIstruzioni, -MemProv)		richiama creazione_istruzioni/2. Restituisce la memoria 
 								contenente le istruzioni in codice macchiina.
 
-creazione_indirizzi_etichette(+Lista1, +Pos, -Lista2)	Lista1 è la lista delle parole dell'istruzione.
+creazione_indirizzi_etichette(+Lista1, +Pos, -Lista2)	Lista1 Ã¨ la lista delle parole dell'istruzione.
 							Il predicato rimuove l'etichetta precedente l'istruzione e
 							sostituisce l'etichetta successiva l'istruzione con il 
 							corrispondente valore numerico.
 
-sostituzione_etichette(+Lista1, -Lista2)	Lista1 è una lista di stringhe (righe del file assembly).
+sostituzione_etichette(+Lista1, -Lista2)	Lista1 Ã¨ una lista di stringhe (righe del file assembly).
 						Richiama creazione_indirizzi_etichette/3.
-						Lista2 è una lista di stringhe dove le etichette sono state sostituite
+						Lista2 Ã¨ una lista di stringhe dove le etichette sono state sostituite
 						con il loro corrispettivo numerico.
 
-ricerca_pattern(+ListaIstruzione, +Pos)		ListaIstruzione è una lista che contiene le singole parole dell'istruzione.
-						Controlla se la prima parola dell'istruzione è un'etichetta:
-						se sì, richiama creazione_etichetta/2, altrimenti interrompe la ricerca del pattern.
+ricerca_pattern(+ListaIstruzione, +Pos)		ListaIstruzione Ã¨ una lista che contiene le singole parole dell'istruzione.
+						Controlla se la prima parola dell'istruzione Ã¨ un'etichetta:
+						se sÃ¬, richiama creazione_etichetta/2, altrimenti interrompe la ricerca del pattern.
 
 ricerca_etichette(+ListaDiStringhe, +Pos)	applica ricerca_pattern/2 ai singoli elementi della lista ListaDiStringhe.			
 
@@ -115,14 +108,14 @@ branch_if_zero(+XX, +Flag, +Acc, +Pc1, -Pc2)
 branch_if_positive(+XX, +Flag, +Pc1, -Pc2)
 
 execution_loop(+State, -Out)	richiama ricorsivamente one_instruction/2. Se uno dei NewState prodotti dalla
-				one_instruction/2 è un halted_state, il predicato produce un caso di halt.
+				one_instruction/2 Ã¨ un halted_state, il predicato produce un caso di halt.
 
 one_instruction(+State, -NewState)	State e NewState sono rispettivamente state(Acc1, Pc1, Mem1, In1, Out1, Flag1)
 					e state(Acc2, Pc2, Mem2, In2, Out2, Flag2).
 					Chiamiamo Istruzione l'elemento di Mem1 alla posizione Pc1 e
-					chiamiamo Content l'elemento di Mem1 alla posizione XX (dove XX è Istruzione%100).
+					chiamiamo Content l'elemento di Mem1 alla posizione XX (dove XX Ã¨ Istruzione%100).
 					Se:
-					- (Istruzione >= 0 e Istruzione <= 99) NewState è un halted_state;
+					- (Istruzione >= 0 e Istruzione <= 99) NewState Ã¨ un halted_state;
 					- (Istruzione >= 400 e Istruzione <= 499 o
 					   Istruzione  = 900 o
 					   Istruzione >= 903 e Istruzione <= 999) il programma viene interrotto;
