@@ -1,4 +1,5 @@
 # Little Man Computer
+In collaborazione con [Sofia Amarù](https://github.com/amarusofia)
 
 ## Overview del progetto
 
